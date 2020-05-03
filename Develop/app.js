@@ -10,6 +10,124 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const emailValidation = value => {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+        return true;
+    } else {
+    return "Must be a valid email address";
+    }
+};
+
+const emptyResponseValidation = value => {
+    if (/\w/.test(value)) {
+        return true;
+    } else {
+    return "Input required";
+    }
+};
+
+const checkNum = value => {
+    if(isNaN(value) || value < 1) {
+        return "Answer must be a number greater than zero"
+    } else {
+        return true;
+    }
+}
+
+inquirerQuestions();
+
+function inquirerQuestions() { 
+
+inquirer.prompt([
+    {
+        type: "input",
+        name: "name",
+        message: "What is the team members name?",
+        validate: emptyResponseValidation
+    },
+    {
+        type: "input",
+        name: "email",
+        message: "What is their email address?",
+        validate: emailValidation
+    },
+    {
+        type: "input",
+        name: "id",
+        message: "What is their Employee ID?",
+        validate: checkNum
+    },
+    {
+        type: "list",
+        name: "role",
+        message: "What is their role?",
+        choices: ["Engineer","Intern","Manager"]
+    },
+    {
+        type: "input",
+        name: "officeNumber",
+        message: "What is their office number?",
+        when: (answers) => answers.role === "Manager",
+        validate: checkNum
+    },
+    {
+        type: "input",
+        name: "github",
+        message: "What is their GitHub username?",
+        when: (answers) => answers.role === "Engineer",
+        validate: emptyResponseValidation
+    },
+    {
+        type: "input",
+        name: "school",
+        message: "What school do they attend?",
+        when: (answers) => answers.role === "Intern",
+        validate: emptyResponseValidation
+    },
+
+]).then(function(data) {
+    if(data.role === "Engineer") {
+    let newEngineer = new Engineer(data.name, data.id, data.email, data.github);
+    console.log(newEngineer);
+    // Push to an array
+    } 
+    if(data.role === "Manager") {
+    let newManager = new Manager(data.name, data.id, data.email, data.officeNumber);
+    console.log(newManager);
+    // Push to an array
+    }
+    if(data.role === "Intern") {
+    let newIntern = new Intern(data.name, data.id, data.email, data.school);
+    console.log(newIntern);
+    // Push to an arry
+    }
+
+}).then(function(){
+    
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "additionalEmployees",
+            message: "Would you like to add another employee?",
+            choices: ["Yes", "No"]
+        },
+]).then(function(answers){
+    if(answers.additionalEmployees === "Yes") {
+       inquirerQuestions()
+    } else {
+        // Run render function with built array
+    }
+})
+
+}).catch(function(err) {
+    console.log(err);
+  })
+
+}
+
+
+
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
