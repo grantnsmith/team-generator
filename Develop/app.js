@@ -10,6 +10,8 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+// EMAIL INPUT VALIDATION
+
 const emailValidation = value => {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
         return true;
@@ -18,6 +20,8 @@ const emailValidation = value => {
     }
 };
 
+// EMPTY RESPONSE VALIDATION
+
 const emptyResponseValidation = value => {
     if (/\w/.test(value)) {
         return true;
@@ -25,6 +29,8 @@ const emptyResponseValidation = value => {
     return "Input required";
     }
 };
+
+// CHECKING FOR NUMBER VALIDATION
 
 const checkNum = value => {
     if(isNaN(value) || value < 1) {
