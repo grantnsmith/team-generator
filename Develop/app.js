@@ -124,7 +124,7 @@ inquirer.prompt([
     if(answers.additionalEmployees === "Yes") {
        inquirerQuestions()
     } else {
-        // Run render function with built array
+        render(teamArr);
     }
 })
 
