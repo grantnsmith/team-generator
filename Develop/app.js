@@ -40,15 +40,26 @@ const checkNum = value => {
     }
 }
 
+// EMPTY ARRAY FOR TEAM MEMBER INSTANCES
+
+const teamArr = [];
+
+
 inquirerQuestions();
 
 function inquirerQuestions() { 
 
 inquirer.prompt([
     {
+        type: "list",
+        name: "role",
+        message: "What is the Employees role?",
+        choices: ["Engineer","Intern","Manager"]
+    },
+    {
         type: "input",
         name: "name",
-        message: "What is the team members name?",
+        message: "What is the Employees name?",
         validate: emptyResponseValidation
     },
     {
@@ -62,12 +73,6 @@ inquirer.prompt([
         name: "id",
         message: "What is their Employee ID?",
         validate: checkNum
-    },
-    {
-        type: "list",
-        name: "role",
-        message: "What is their role?",
-        choices: ["Engineer","Intern","Manager"]
     },
     {
         type: "input",
@@ -92,20 +97,18 @@ inquirer.prompt([
     },
 
 ]).then(function(data) {
+
     if(data.role === "Engineer") {
     let newEngineer = new Engineer(data.name, data.id, data.email, data.github);
-    console.log(newEngineer);
-    // Push to an array
+    teamArr.push(newEngineer);
     } 
     if(data.role === "Manager") {
     let newManager = new Manager(data.name, data.id, data.email, data.officeNumber);
-    console.log(newManager);
-    // Push to an array
+    teamArr.push(newManager);
     }
     if(data.role === "Intern") {
     let newIntern = new Intern(data.name, data.id, data.email, data.school);
-    console.log(newIntern);
-    // Push to an arry
+    teamArr.push(newIntern);
     }
 
 }).then(function(){
