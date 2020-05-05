@@ -5,7 +5,7 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
-const OUTPUT_DIR = path.resolve(__dirname, "output");
+const OUTPUT_DIR = path.resolve(__dirname, "./output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
@@ -119,13 +119,18 @@ inquirer.prompt([
             name: "additionalEmployees",
             message: "Would you like to add another employee?",
             choices: ["Yes", "No"]
-        },
+        }
 ]).then(function(answers){
     if(answers.additionalEmployees === "Yes") {
        inquirerQuestions()
     } else {
-        render(teamArr);
-    }
+        let html = render(teamArr);
+        fs.writeFile(outputPath, html, "utf8", function (err){
+            if(err) {
+                return(err);
+            }
+        });
+    } 
 })
 
 }).catch(function(err) {
