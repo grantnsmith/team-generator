@@ -6,9 +6,9 @@ A command line application that generates an HTML formatted team roster based of
 * [Video of Application in Action](https://drive.google.com/file/d/1pfCjzlIWOPkIIdZK3SzmroUWXVqK9u25/view)
 
 ## Application in Action
-photo
-photo
-GIF
+* ![](Assets/team-generator-CLI.png)
+* ![](Assets/team-generator-HTML.png)
+* ![](Assets/team-generator.gif)
 
 ## Technologies Used
 * Javascript
