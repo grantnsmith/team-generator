@@ -6,13 +6,17 @@ A command line application that generates an HTML formatted team roster based of
 * [Video of Application in Action](https://drive.google.com/file/d/1pfCjzlIWOPkIIdZK3SzmroUWXVqK9u25/view)
 
 ## Application in Action
-* ![](Assets/team-generator-CLI.png)
-* ![](Assets/team-generator-HTML.png)
-* ![](Assets/team-generator.gif)
+* Command line interface using Inquirer 
+![](Assets/team-generator-CLI.png)
+* Finished product, auto-generated with template HTML
+![](Assets/team-generator-HTML.png)
+* The application in action (gif)
+![](Assets/team-generator.gif)
 
 ## Technologies Used
 * Javascript
 * CSS and HTML
+* Bootstrap
 * Node.js
 * Node modules: Inquirer, path, fs, Jest
 
